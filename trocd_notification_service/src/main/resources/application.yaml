@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: trocd_notification_service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/notification_db
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-group-id
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+
+    listener:
+      concurrency: 3
+
+    admin:
+      properties:
+        partitions: 3
+        replication-factor: 1
+
+telegram:
+  bot:
+    token: 8253884818:AAGpMU1rOBrxu6WcmPVvvbBDwFX952WhrUY
+  chat:
+    id: 1184431844

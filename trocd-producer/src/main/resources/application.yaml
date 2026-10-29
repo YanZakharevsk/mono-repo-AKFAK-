@@ -1,0 +1,26 @@
+spring:
+
+  application:
+    name: trocd-producer
+  datasource:
+    url: jdbc:postgresql://localhost:5433/billing-db
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    admin:
+      properties:
+        partitions: 3
+        replication-factor: 1
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+server:
+  port: 8081
